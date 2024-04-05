@@ -1,0 +1,27 @@
+FROM php:8.2-fpm
+
+RUN apt-get update && apt-get install -y \
+        sudo\
+        git \
+        unzip \
+        vim \
+        zlib1g-dev \
+        libxml2-dev \
+        libzip-dev \
+        unzip \
+        librabbitmq-dev \
+        && docker-php-ext-install pdo pdo_mysql zip bcmath \
+        && pecl install amqp
+
+RUN docker-php-ext-enable amqp
+RUN docker-php-ext-install sockets
+
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+
+WORKDIR /var/www/html
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN composer install
+
+CMD ["php-fpm"]

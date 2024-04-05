@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - app
+      - mysql
+      - rabbitmq
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app_router.rule=Host(`nextbaskettech.localhost`)
+      - traefik.http.routers.app_router.service=app_service
+      - traefik.http.services.app_service.loadbalancer.server.port=80
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DATABASE_URL=mysql://symfony:symfony@mysql:3306/symfony
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.phpmyadmin.rule=Host(`pma.nextbaskettech.localhost`)
+      - traefik.http.services.phpmyadmin.loadbalancer.server.port=80
+
+  rabbitmq:
+    image: rabbitmq:latest
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.nextbaskettech.localhost`)
+      - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
+
+  traefik:
+    image: "traefik:v2.4"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
