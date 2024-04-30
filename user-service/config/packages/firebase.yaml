@@ -1,0 +1,6 @@
+kreait_firebase:
+  projects:
+    my_project:
+      credentials: '%kernel.project_dir%/src/Entity/Firebase/credentials.json'
+    other_project: # optional
+      credentials: '%kernel.project_dir%/src/Entity/Firebase/credentials.json'

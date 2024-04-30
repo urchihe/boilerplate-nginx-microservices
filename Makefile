@@ -93,7 +93,7 @@ test-user: ;\
 	docker compose exec user-service composer run test
 
 .PHONY: test-notification
-test-user: ;\
+test-notification: ;\
 	docker compose exec notification-service composer run test
 
 .PHONY: consume

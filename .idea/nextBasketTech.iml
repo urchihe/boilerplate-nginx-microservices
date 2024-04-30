@@ -2,8 +2,8 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/user-service/src" isTestSource="false" packagePrefix="App\" />
-      <sourceFolder url="file://$MODULE_DIR$/user-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/notification-service/src" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/notification-service/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/notification-service/vendor/brianium/paratest" />
       <excludeFolder url="file://$MODULE_DIR$/notification-service/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/notification-service/vendor/dealerdirect/phpcodesniffer-composer-installer" />
@@ -246,6 +246,41 @@
       <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/ta-tikoma/phpunit-architecture-test" />
       <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/notification-service/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/notification-service/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/ktamas77/firebase-php" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/symfony/monolog-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/symfony/monolog-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/beste/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/beste/json" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/fig/http-message-util" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/auth" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/cloud-core" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/cloud-firestore" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/cloud-storage" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/crc32" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/gax" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/proto-client" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/google/protobuf" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/grpc/grpc" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/kreait/firebase-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/kreait/firebase-php" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/kreait/firebase-tokens" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/mtdowling/jmespath.php" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/user-service/vendor/rize/uri-template" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

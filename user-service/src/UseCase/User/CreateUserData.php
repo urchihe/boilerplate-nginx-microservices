@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-readonly class createUserData
+readonly class CreateUserData
 {
     public function __construct(
         private EntityManagerInterface $entityManager,

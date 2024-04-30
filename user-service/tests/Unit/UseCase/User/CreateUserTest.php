@@ -3,17 +3,24 @@
 namespace App\Tests\Unit\UseCase\User;
 
 use App\Tests\Unit\UseCase\UseCaseTestCase;
-use App\UseCase\User\getUserData;
+use App\UseCase\Message\SendMessageToNotificationService;
+use App\UseCase\User\createUserData;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class CreateUserTest extends UseCaseTestCase
 {
-    private getUserData $createUser;
+    private createUserData $createUser;
+    private SendMessageToNotificationService $sendMessageToNotificationService;
     public function setUp(): void
     {
         parent::setUp();
-        $this->createUser = self::getFromContainer(getUserData::class);
+        $this->createUser = self::getFromContainer(createUserData::class);
+        $this->sendMessageToNotificationService = self::getFromContainer(SendMessageToNotificationService::class);
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     public function testCreateUser(): void
     {
         $email = 'test@test.com';
@@ -21,10 +28,11 @@ class CreateUserTest extends UseCaseTestCase
         $lastName = 'testLastName';
         //Test Data is saved in database and returned to api
         $user = $this->createUser->saveUser(email:$email, firstName: $firstName, lastName: $lastName);
-        self::assertEquals($user->getEmail(), $email);
-        self::assertEquals($user->getFirstName(), $firstName);
-        self::assertEquals($user->getLastName(), $lastName);
-        //Test Data is in rabbitQM broker dispatched CreateUserMessage
-        //Test Data is CreateUserMessageHandler consumed the data
+        self::assertEquals($email, $user->getEmail());
+        self::assertEquals($firstName, $user->getFirstName());
+        self::assertEquals($lastName, $user->getLastName());
+        //Test Data is received in the notification service
+        $messageCode = $this->sendMessageToNotificationService->sendNotification($user);
+        self::assertEquals(200, $messageCode);
     }
 }

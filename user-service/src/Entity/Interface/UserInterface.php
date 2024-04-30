@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\interface;
+namespace App\Entity\Interface;
 
 interface UserInterface
 {

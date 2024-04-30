@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\interface\UserInterface;
+use App\Entity\Interface\UserInterface;
 use App\Enum\DataGroup;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;

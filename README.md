@@ -1,3 +1,7 @@
+# About the project
+This project involves the development of a Symfony microservices application hosted on Docker containers, orchestrated by Nginx, and communicating via RabbitMQ message broker. This architecture enables flexible, scalable, and resilient application development, catering to modern software development requirements.
+
+By integrating Firebase configuration into the Symfony microservices application, developers can leverage the power and flexibility of Firebase's backend services to build scalable, secure, and feature-rich applications that meet the demands of modern web and mobile development.
 # Setup the project
 Clone the project
 

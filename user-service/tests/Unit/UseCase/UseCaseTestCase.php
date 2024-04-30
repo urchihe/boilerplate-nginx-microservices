@@ -50,6 +50,4 @@ class UseCaseTestCase extends WebTestCase
 
         $method->invokeArgs($object, $parameters);
     }
-
-
 }
