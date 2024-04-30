@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-
 use App\UseCase\User\GetUserData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,7 +61,9 @@ class UserController extends AbstractController
         $lastName = $data['lastName'] ?? '';
 
         $response = $this->client->request(
-            'POST', 'http://user-service/check-users', [
+            'POST',
+            'http://user-service/check-users',
+            [
             'body' => [
                 'email' => $email,
                 'firstName' => $firstName,
@@ -70,7 +71,8 @@ class UserController extends AbstractController
             ],
             "verify_peer" => false,
             "verify_host" => false
-        ]);
+            ]
+        );
         $content =  $response->getContent();
 
         return new Response($content, 200);
