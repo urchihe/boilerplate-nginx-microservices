@@ -52,4 +52,5 @@ jobs:
         working-directory: ./user-service
         env:
           DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
+          TEST_DRIVER: pdo_sqlite
         run: composer test
