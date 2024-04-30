@@ -1,40 +1,50 @@
-name: Phpcs
-on: [push]
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Symfony
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
 jobs:
-  phpcs:
+  symfony-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        working-directory: ./user-service
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        working-directory: ./user-service
-        uses: shivammathur/setup-php@v2
+      #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
+      # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
+      # uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
         with:
           php-version: '8.2'
-          coverage: none
-          tools: composer, cs2pr
-
-      - name: Get Composer cache directory
+      - uses: actions/checkout@v4
+      - name: Copy .env.test.local
+        working-directory: ./user-service
+        run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
+      - name: Cache Composer packages
         working-directory: ./user-service
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Setup cache
-        working-directory: ./user-service
-        uses: pat-s/always-upload-cache@v1.1.4
+        uses: actions/cache@v3
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          # Use the hash of composer.json as the key for your cache if you do not commit composer.lock.
-          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install dependencies
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Install Dependencies
         working-directory: ./user-service
-        run: composer install --prefer-dist --no-suggest --no-progress
-
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Detect coding standard violations
         working-directory: ./user-service
         run: composer cs-check
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        working-directory: ./user-service
+        env:
+          DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
+        run: composer test
