@@ -5,9 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        working-directory: ./user-service
         uses: actions/checkout@v2
 
       - name: Setup PHP
+        working-directory: ./user-service
+        run: cp .env.example .env
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
@@ -15,10 +18,12 @@ jobs:
           tools: composer, cs2pr
 
       - name: Get Composer cache directory
+        working-directory: ./user-service
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Setup cache
+        working-directory: ./user-service
         uses: pat-s/always-upload-cache@v1.1.4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
@@ -28,7 +33,9 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
+        working-directory: ./user-service
         run: composer install --prefer-dist --no-suggest --no-progress
 
       - name: Detect coding standard violations
+        working-directory: ./user-service
         run: composer cs-check
