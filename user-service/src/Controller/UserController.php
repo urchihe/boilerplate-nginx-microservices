@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Enum\DataGroup;
 use App\Services\FirebaseService;
-use App\UseCase\User\createUserData;
+use App\UseCase\User\CreateUserData;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
