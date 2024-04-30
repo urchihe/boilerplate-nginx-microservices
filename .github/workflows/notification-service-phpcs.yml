@@ -10,7 +10,6 @@ jobs:
 
       - name: Setup PHP
         working-directory: ./notification-service
-        run: cp .env.example .env
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
