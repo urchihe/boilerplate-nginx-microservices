@@ -4,7 +4,7 @@ namespace App\Tests\Unit\UseCase\User;
 
 use App\Tests\Unit\UseCase\UseCaseTestCase;
 use App\UseCase\Message\SendMessageToNotificationService;
-use App\UseCase\User\createUserData;
+use App\UseCase\User\CreateUserData;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class CreateUserTest extends UseCaseTestCase

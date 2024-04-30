@@ -6,7 +6,7 @@ namespace App\UseCase\User;
 
 use Psr\Log\LoggerInterface;
 
-readonly class getUserData
+readonly class GetUserData
 {
     public function __construct(
         private LoggerInterface $logger
