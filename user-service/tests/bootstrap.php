@@ -19,7 +19,7 @@ if (! $bootstrapFileExists && method_exists(Dotenv::class, 'bootEnv')) {
 
 $processes = [
 //    // Delete the "tests" database.
-//    new Process(['php', 'bin/console', 'doctrine:database:drop', '-n', '--force', '--if-exists']),
+    new Process(['php', 'bin/console', 'doctrine:database:drop', '-n', '--force', '--if-exists']),
     // Create the "tests" database.
     new Process(['php', 'bin/console', 'doctrine:database:create', '-n', '--if-not-exists']),
     // Create tables.
