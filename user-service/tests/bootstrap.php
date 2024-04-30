@@ -18,14 +18,14 @@ if (! $bootstrapFileExists && method_exists(Dotenv::class, 'bootEnv')) {
 
 
 $processes = [
-    // Delete the "tests" database.
-    new Process(['php', 'bin/console', 'doctrine:database:drop', '-n', '--force', '--if-exists']),
-    // Create the "tests" database.
-    new Process(['php', 'bin/console', 'doctrine:database:create', '-n', '--if-not-exists']),
-    // Create tables.
-    new Process(['php', 'bin/console', 'doctrine:schema:update', '--complete', '-f']),
-    // Clear the cache.
-    new Process(['php', 'bin/console', 'cache:clear', '--no-warmup']),
+//    // Delete the "tests" database.
+//    new Process(['php', 'bin/console', 'doctrine:database:drop', '-n', '--force', '--if-exists']),
+//    // Create the "tests" database.
+//    new Process(['php', 'bin/console', 'doctrine:database:create', '-n', '--if-not-exists']),
+//    // Create tables.
+//    new Process(['php', 'bin/console', 'doctrine:schema:update', '--complete', '-f']),
+//    // Clear the cache.
+//    new Process(['php', 'bin/console', 'cache:clear', '--no-warmup']),
 
     new Process(['composer', 'load-fixtures']),
 ];
