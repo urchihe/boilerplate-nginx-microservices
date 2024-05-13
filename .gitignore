@@ -1,3 +1,3 @@
-/mysql
+/mysql_data
 .env
 /user-service/src/Entity/Firebase/*.json

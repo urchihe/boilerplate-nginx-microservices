@@ -30,10 +30,6 @@ services:
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
       - DATABASE_URL=mysql://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@mysql:3306/${USER_DATABASE_NAME}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_USERNAME=${DATABASE_USERNAME}
-      - DATABASE_NAME=${USER_DATABASE_NAME}
-      - TEST_DRIVER=${TEST_DRIVER}
       - FIREBASE_API_KEY=${FIREBASE_API_KEY}
       - FIREBASE_AUTH_DOMAIN=${FIREBASE_AUTH_DOMAIN}
       - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
@@ -41,6 +37,7 @@ services:
       - FIREBASE_MESSAGING_SENDER_ID=${FIREBASE_MESSAGING_SENDER_ID}
       - FIREBASE_APP_ID=${FIREBASE_APP_ID}
       - FIREBASE_MEASUREMENT_ID=${FIREBASE_MEASUREMENT_ID}
+      - MESSENGER_TRANSPORT_DSN=${MESSENGER_TRANSPORT_DSN}
     depends_on:
       - mysql
     hostname: user-service
@@ -61,16 +58,16 @@ services:
 
   mysql:
     image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
-      - ./mysql:/var/lib/mysql
-      - ./commands/01.sql:/docker-entrypoint-initdb.d/commands/01.sql
+      - ./mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MYSQL_DATABASE: ${USER_DATABASE_NAME}
       MYSQL_USER: ${DATABASE_USERNAME}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "3306:3306"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -110,4 +107,4 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
 volumes:
-  mysql:
+  mysql_data:
