@@ -7,6 +7,9 @@
           <option name="path" value="$PROJECT_DIR$/tests" />
         </Configuration>
         <Configuration>
+          <option name="path" value="$PROJECT_DIR$/notification-service/tests" />
+        </Configuration>
+        <Configuration>
           <option name="path" value="$PROJECT_DIR$/user-service/tests" />
         </Configuration>
       </list>

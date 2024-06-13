@@ -1,17 +1,29 @@
 # .ALLPREFIX = "   "
-# Load .env variable (all .env are added if available)
+# Include .env.test if it exists
 ifneq (, $(wildcard ./.env.test))
-	include .env
+	include .env.test
 	export
 endif
+
+# Include .env if it exists
 ifneq (, $(wildcard ./.env))
 	include .env
 	export
 endif
-ifneq (, $(wildcard ./.env.pro))
+
+# Include .env.prod if it exists
+ifneq (, $(wildcard ./.env.prod))
 	include .env.prod
 	export
 endif
+# Target to create .env file from .env.example
+create-env:
+	@if [ ! -f .env ]; then \
+		cp .env.example .env; \
+		echo ".env file created from .env.example"; \
+	else \
+		echo ".env file already exists. Skipping."; \
+	fi
 
 #connect to php container
 .PHONY: user-servicebash
@@ -29,7 +41,7 @@ migrate: ;\
 	docker compose exec user-service composer --run console doctrine:migrate:migrate -n
 
 #up docker composer
-up: ;\
+up: create-env ;\
 	DOCKER_BUILDKIT=1 docker compose up -d
 
 #down docker composer
@@ -47,7 +59,7 @@ fup: ;\
 
 #Launch  rabbitmq management UI
 .PHONY: rqmui
-rqmui: ;\
+rqmui: create-env ;\
 	docker compose exec rabbitmq rabbitmq-plugins enable rabbitmq_management
 
 # Soft Restart
